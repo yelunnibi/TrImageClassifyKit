@@ -1,0 +1,23 @@
+PODS:
+  - OpenCV (4.3.0)
+  - TrImageClassifyKit (0.1.0):
+    - OpenCV
+
+DEPENDENCIES:
+  - TrImageClassifyKit (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - OpenCV
+
+EXTERNAL SOURCES:
+  TrImageClassifyKit:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  OpenCV: 681e0451c1e54c5930a8922277f817ed5d5ab459
+  TrImageClassifyKit: 3e7a5fdc7239d0cd539cb8d11f52b634cbff64c2
+
+PODFILE CHECKSUM: 1686bc897fed7e1c4711535c5cb67f0da7b8ad86
+
+COCOAPODS: 1.15.2
