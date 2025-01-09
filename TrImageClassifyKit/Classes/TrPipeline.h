@@ -1,10 +1,3 @@
-//
-//  ZDOCRPipeline.h
-//  Pods-ZDOCRKit_Example
-//
-//  Created by 孙树康 on 2024/6/3.
-//
-
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -20,14 +13,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface ZDOCRPipeline : NSObject
+@interface TrPipeline : NSObject
 // 配置语言
-@property (nonatomic, copy, readonly) NSString *langCode;
+//@property (nonatomic, copy, readonly) NSString *langCode;
 
 // 模型配置
-- (void)configLanguage: (NSString *)langCode;
+//- (void)configLanguage: (NSString *)langCode;
 
-- (NSArray <PiplineResult *>*)beganOCR: (UIImage *)image;
+//- (NSArray <PiplineResult *>*)beganOCR: (UIImage *)image;
 
 @end
 

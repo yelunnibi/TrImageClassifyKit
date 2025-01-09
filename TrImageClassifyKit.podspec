@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'TrImageClassifyKit'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of TrImageClassifyKit.'
+  s.summary          = 'TrImageClassifyKit can classify images.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -21,15 +21,15 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/dc-zy/TrImageClassifyKit'
+  s.homepage         = 'https://github.com/yelunnibi/TrImageClassifyKit.git'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.version          = '0.1.0'
   s.author           = { 'dc-zy' => 'dc-zy@zy.com' }
-  s.source           = { :git => 'https://github.com/dc-zy/TrImageClassifyKit.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/yelunnibi/TrImageClassifyKit.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
   
-  s.ios.deployment_target = '11.0'
+  s.ios.deployment_target = '15.0'
 
   s.source_files = 'TrImageClassifyKit/Classes/**/*', 'TrImageClassifyKit/include/*.h'
   
@@ -42,13 +42,17 @@ TODO: Add long description of the pod here.
     'TrImageClassifyKit' => ['TrImageClassifyKit/assets/*']
   }
   
-  s.pod_target_xcconfig = {
-#    'DEFINES_MODULE' => 'YES',
-#    'VALID_ARCHS' => 'armv7 arm64',
-    # enabled C++11 support
-#    'CLANG_CXX_LANGUAGE_STANDARD' => 'c++11',
-    
-  }
+#  s.pod_target_xcconfig = {
+#    'OTHER_CPLUSPLUSFLAGS' => '-mfloat-abi=hard',
+#    'OTHER_CFLAGS' => '-mfloat-abi=hard'
+#  }
+  
+#  s.pod_target_xcconfig = {
+#    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64',
+#    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'x86_64',
+#    'OTHER_CPLUSPLUSFLAGS' => '-mfloat-abi=hard',
+#    'OTHER_CFLAGS' => '-mfloat-abi=hard'
+#  }
   
   s.dependency 'OpenCV'
 end
