@@ -1,22 +1,22 @@
 PODS:
-  - OpenCV (4.3.0)
+  - OpenCV2 (4.3.0)
   - TrImageClassifyKit (0.1.0):
-    - OpenCV
+    - OpenCV2
 
 DEPENDENCIES:
   - TrImageClassifyKit (from `../`)
 
 SPEC REPOS:
   trunk:
-    - OpenCV
+    - OpenCV2
 
 EXTERNAL SOURCES:
   TrImageClassifyKit:
     :path: "../"
 
 SPEC CHECKSUMS:
-  OpenCV: 681e0451c1e54c5930a8922277f817ed5d5ab459
-  TrImageClassifyKit: 297fee5b27d17523ce1d21644d95ea848142b0ee
+  OpenCV2: ffe82e5cb5d16dc3fc01a5f4127b9a5b3cfc7d1b
+  TrImageClassifyKit: 11c92650a0fda2e231e9f08bf7072570b2a577e3
 
 PODFILE CHECKSUM: 2dbbc0b89b911bebbfe89f0dd3ee44e52ccb712b
 

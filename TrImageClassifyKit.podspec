@@ -24,7 +24,7 @@ TODO: Add long description of the pod here.
   s.homepage         = 'https://github.com/yelunnibi/TrImageClassifyKit.git'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.author           = { 'dc-zy' => 'dc-zy@zy.com' }
   s.source           = { :git => 'https://github.com/yelunnibi/TrImageClassifyKit.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
@@ -54,5 +54,5 @@ TODO: Add long description of the pod here.
 #    'OTHER_CFLAGS' => '-mfloat-abi=hard'
 #  }
   
-  s.dependency 'OpenCV'
+  s.dependency 'OpenCV2'
 end

@@ -1,10 +1,3 @@
-//
-//  ZDLetterOCRPipeline.h
-//  ZDOCRKit
-//
-//  Created by 孙树康 on 2024/12/17.
-//
-
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
