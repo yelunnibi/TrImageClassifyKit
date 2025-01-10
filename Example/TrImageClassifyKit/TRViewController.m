@@ -33,21 +33,21 @@
     
     dispatch_async(queue, ^{
         NSDate *startTime = [NSDate date];
-        int idx = [self.classer classifyImage:img];
+        ClassificationResult idx = [self.classer classifyImage:img];
         NSTimeInterval timeElapsed = [[NSDate date] timeIntervalSinceDate:startTime] * 1000;//
         NSLog(@"1--结果=%d, 耗时=%.2f毫秒", idx, timeElapsed);
     });
     
     dispatch_async(queue, ^{
         NSDate *startTime = [NSDate date];
-        int idx = [self.classer classifyImage:img2];
+        ClassificationResult idx = [self.classer classifyImage:img2];
         NSTimeInterval timeElapsed = [[NSDate date] timeIntervalSinceDate:startTime] * 1000;
         NSLog(@"2--结果=%d, 耗时=%.2f毫秒", idx, timeElapsed);
     });
     
     dispatch_async(queue, ^{
         NSDate *startTime = [NSDate date];
-        int idx = [self.classer classifyImage:img3];
+        ClassificationResult idx = [self.classer classifyImage:img3];
             NSTimeInterval timeElapsed = [[NSDate date] timeIntervalSinceDate:startTime] * 1000;
 //            dispatch_async(dispatch_get_main_queue(), ^{
                 NSLog(@"3--结果=%d, 耗时=%.2f毫秒", idx, timeElapsed);
@@ -57,7 +57,7 @@
     
     dispatch_async(queue, ^{
         NSDate *startTime = [NSDate date];
-        int idx = [self.classer classifyImage:img4];
+        ClassificationResult idx = [self.classer classifyImage:img4];
             NSTimeInterval timeElapsed = [[NSDate date] timeIntervalSinceDate:startTime] * 1000;
 //            dispatch_async(dispatch_get_main_queue(), ^{
                 NSLog(@"4--结果=%d, 耗时=%.2f毫秒", idx, timeElapsed);
@@ -67,7 +67,7 @@
     
     dispatch_async(queue, ^{
         NSDate *startTime = [NSDate date];
-        int idx = [self.classer classifyImage:img];
+        ClassificationResult idx = [self.classer classifyImage:img];
             NSTimeInterval timeElapsed = [[NSDate date] timeIntervalSinceDate:startTime] * 1000;
 //            dispatch_async(dispatch_get_main_queue(), ^{
                 NSLog(@"5--结果=%d, 耗时=%.2f毫秒", idx, timeElapsed);
@@ -78,7 +78,7 @@
     
     dispatch_async(queue, ^{
         NSDate *startTime = [NSDate date];
-        int idx = [self.classer classifyImage:img2];
+        ClassificationResult idx = [self.classer classifyImage:img2];
             NSTimeInterval timeElapsed = [[NSDate date] timeIntervalSinceDate:startTime] * 1000;
 //            dispatch_async(dispatch_get_main_queue(), ^{
                 NSLog(@"6--结果=%d, 耗时=%.2f毫秒", idx, timeElapsed);
@@ -88,7 +88,7 @@
     
     dispatch_async(queue, ^{
         NSDate *startTime = [NSDate date];
-        int idx = [self.classer classifyImage:img3];
+        ClassificationResult idx = [self.classer classifyImage:img3];
             NSTimeInterval timeElapsed = [[NSDate date] timeIntervalSinceDate:startTime] * 1000;
 //            dispatch_async(dispatch_get_main_queue(), ^{
                 NSLog(@"7--结果=%d, 耗时=%.2f毫秒", idx, timeElapsed);
@@ -98,7 +98,7 @@
     
     dispatch_async(queue, ^{
         NSDate *startTime = [NSDate date];
-        int idx = [self.classer classifyImage:img4];
+        ClassificationResult idx = [self.classer classifyImage:img4];
             NSTimeInterval timeElapsed = [[NSDate date] timeIntervalSinceDate:startTime] * 1000;
 //            dispatch_async(dispatch_get_main_queue(), ^{
                 NSLog(@"8--结果=%d, 耗时=%.2f毫秒", idx, timeElapsed);

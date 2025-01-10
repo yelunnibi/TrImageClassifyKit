@@ -30,7 +30,7 @@ void load_labels(const std::string& path, std::vector<std::string>* labels) {
   ifs.close();
 }
 
-int print_above_threshold(const float* scores,
+std::pair<int, float> print_above_threshold(const float* scores,
                            const int size,
                            const float confidence_th,
                            const std::vector<std::string>& labels) {
@@ -53,57 +53,57 @@ int print_above_threshold(const float* scores,
                index,
                labels[index].c_str(),
                score);
-        return index;
+        return std::make_pair(index, score);
     }
-    return -11;
+    return std::make_pair(-11, 0);
 }
 // fill tensor with mean and scale and trans layout: nhwc -> nchw, neon speed up
-//void neon_mean_scale(
-//    const float* din, float* dout, int size, float* mean, float* scale) {
-//  float32x4_t vmean0 = vdupq_n_f32(mean[0]);
-//  float32x4_t vmean1 = vdupq_n_f32(mean[1]);
-//  float32x4_t vmean2 = vdupq_n_f32(mean[2]);
-//  float32x4_t vscale0 = vdupq_n_f32(1.f / scale[0]);
-//  float32x4_t vscale1 = vdupq_n_f32(1.f / scale[1]);
-//  float32x4_t vscale2 = vdupq_n_f32(1.f / scale[2]);
-//
-//  float* dout_c0 = dout;
-//  float* dout_c1 = dout + size;
-//  float* dout_c2 = dout + size * 2;
-//
-//  int i = 0;
-//  for (; i < size - 3; i += 4) {
-//    float32x4x3_t vin3 = vld3q_f32(din);
-//    float32x4_t vsub0 = vsubq_f32(vin3.val[0], vmean0);
-//    float32x4_t vsub1 = vsubq_f32(vin3.val[1], vmean1);
-//    float32x4_t vsub2 = vsubq_f32(vin3.val[2], vmean2);
-//    float32x4_t vs0 = vmulq_f32(vsub0, vscale0);
-//    float32x4_t vs1 = vmulq_f32(vsub1, vscale1);
-//    float32x4_t vs2 = vmulq_f32(vsub2, vscale2);
-//    vst1q_f32(dout_c0, vs0);
-//    vst1q_f32(dout_c1, vs1);
-//    vst1q_f32(dout_c2, vs2);
-//
-//    din += 12;
-//    dout_c0 += 4;
-//    dout_c1 += 4;
-//    dout_c2 += 4;
-//  }
-//  for (; i < size; i++) {
-//    *(dout_c0++) = (*(din++) - mean[0]) * scale[0];
-//    *(dout_c0++) = (*(din++) - mean[1]) * scale[1];
-//    *(dout_c0++) = (*(din++) - mean[2]) * scale[2];
-//  }
-//}
-
 void neon_mean_scale(
     const float* din, float* dout, int size, float* mean, float* scale) {
-  for (int i = 0; i < size; i++) {
-    dout[i * 3 + 0] = (din[i * 3 + 0] - mean[0]) * scale[0];
-    dout[i * 3 + 1] = (din[i * 3 + 1] - mean[1]) * scale[1];
-    dout[i * 3 + 2] = (din[i * 3 + 2] - mean[2]) * scale[2];
+  float32x4_t vmean0 = vdupq_n_f32(mean[0]);
+  float32x4_t vmean1 = vdupq_n_f32(mean[1]);
+  float32x4_t vmean2 = vdupq_n_f32(mean[2]);
+  float32x4_t vscale0 = vdupq_n_f32(1.f / scale[0]);
+  float32x4_t vscale1 = vdupq_n_f32(1.f / scale[1]);
+  float32x4_t vscale2 = vdupq_n_f32(1.f / scale[2]);
+
+  float* dout_c0 = dout;
+  float* dout_c1 = dout + size;
+  float* dout_c2 = dout + size * 2;
+
+  int i = 0;
+  for (; i < size - 3; i += 4) {
+    float32x4x3_t vin3 = vld3q_f32(din);
+    float32x4_t vsub0 = vsubq_f32(vin3.val[0], vmean0);
+    float32x4_t vsub1 = vsubq_f32(vin3.val[1], vmean1);
+    float32x4_t vsub2 = vsubq_f32(vin3.val[2], vmean2);
+    float32x4_t vs0 = vmulq_f32(vsub0, vscale0);
+    float32x4_t vs1 = vmulq_f32(vsub1, vscale1);
+    float32x4_t vs2 = vmulq_f32(vsub2, vscale2);
+    vst1q_f32(dout_c0, vs0);
+    vst1q_f32(dout_c1, vs1);
+    vst1q_f32(dout_c2, vs2);
+
+    din += 12;
+    dout_c0 += 4;
+    dout_c1 += 4;
+    dout_c2 += 4;
+  }
+  for (; i < size; i++) {
+    *(dout_c0++) = (*(din++) - mean[0]) * scale[0];
+    *(dout_c0++) = (*(din++) - mean[1]) * scale[1];
+    *(dout_c0++) = (*(din++) - mean[2]) * scale[2];
   }
 }
+
+//void neon_mean_scale(
+//    const float* din, float* dout, int size, float* mean, float* scale) {
+//  for (int i = 0; i < size; i++) {
+//    dout[i * 3 + 0] = (din[i * 3 + 0] - mean[0]) * scale[0];
+//    dout[i * 3 + 1] = (din[i * 3 + 1] - mean[1]) * scale[1];
+//    dout[i * 3 + 2] = (din[i * 3 + 2] - mean[2]) * scale[2];
+//  }
+//}
 
 void pre_process(const cv::Mat& img,
                  int width,
@@ -227,14 +227,15 @@ void pre_process(const cv::Mat& img,
 }
 
 /// 开始图片分类
-- (int)classifyImage:(UIImage *)image {
+- (ClassificationResult)classifyImage:(UIImage *)image {
+    ClassificationResult result = {-1, -1.0f}; // 默认值
     if (!self.flag_init) {
         NSLog(@"[Debug] Pipeline not initialized");// 返回错误
-        return -1;
+        return result;
     }
     
     // 使用dispatch_sync在串行队列中同步执行
-    __block int result = -1;
+//    __block int result = -1;
     //    dispatch_async(self.serialQueue, ^{
     try {
         int height =  224;
@@ -246,7 +247,7 @@ void pre_process(const cv::Mat& img,
         UIImageToMat(image, originMat);
         if (originMat.empty()) {
             NSLog(@"[Debug] Failed to convert UIImage to Mat");
-            return -1;
+            return result;
         }
         //            NSLog(@"[Debug] Original image size: %dx%d, channels: %d", originMat.cols, originMat.rows, originMat.channels());
         
@@ -271,17 +272,19 @@ void pre_process(const cv::Mat& img,
         for (auto& i : shape_out) {
             cnt *= i;
         }
-        result = print_above_threshold(outptr, cnt, confidence_th, labels);
+        auto resultPair = print_above_threshold(outptr, cnt, confidence_th, labels);
+        result.index = resultPair.first;
+        result.score = resultPair.second;
         return result;
     } catch (const cv::Exception& e) {
         NSLog(@"[Debug] OpenCV exception: %s", e.what());
-        return -4;
+          return result;;
     } catch (const std::exception& e) {
         NSLog(@"[Debug] Exception during inference: %s", e.what());
-        return -2;
+        return result;;
     } catch (...) {
         NSLog(@"[Debug] Unknown exception during inference");
-        return -3;
+        return result;;
     }
 }
     
