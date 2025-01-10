@@ -21,8 +21,6 @@ using namespace cv;
 void load_labels(const std::string& path, std::vector<std::string>* labels) {
   std::ifstream ifs(path);
   if (!ifs.is_open()) {
-//    std::cerr << "Load input label file error." << std::endl;
-//    exit(1);
       return;
   }
   std::string line;
@@ -57,7 +55,7 @@ int print_above_threshold(const float* scores,
                score);
         return index;
     }
-    return -2;
+    return -11;
 }
 // fill tensor with mean and scale and trans layout: nhwc -> nchw, neon speed up
 //void neon_mean_scale(
@@ -274,16 +272,16 @@ void pre_process(const cv::Mat& img,
             cnt *= i;
         }
         result = print_above_threshold(outptr, cnt, confidence_th, labels);
-        return -1;
+        return result;
     } catch (const cv::Exception& e) {
         NSLog(@"[Debug] OpenCV exception: %s", e.what());
-        return -1;
+        return -4;
     } catch (const std::exception& e) {
         NSLog(@"[Debug] Exception during inference: %s", e.what());
-        return -1;
+        return -2;
     } catch (...) {
         NSLog(@"[Debug] Unknown exception during inference");
-        return -1;
+        return -3;
     }
 }
     
