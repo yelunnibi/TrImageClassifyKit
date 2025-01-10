@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TrImageClassifyKit'
-  s.version          = '0.1.2'
+  s.version          = '0.1.3'
   s.summary          = 'TrImageClassifyKit can classify images.'
 
 # This description is used to generate tags and improve search results.
@@ -17,14 +17,12 @@ Pod::Spec.new do |s|
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
-  s.description      = <<-DESC
-TODO: Add long description of the pod here.
-                       DESC
+  s.description      = "TrImageClassifyKit can classify images"
 
   s.homepage         = 'https://github.com/yelunnibi/TrImageClassifyKit.git'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.version          = '0.1.1'
+  
   s.author           = { 'dc-zy' => 'dc-zy@zy.com' }
   s.source           = { :git => 'https://github.com/yelunnibi/TrImageClassifyKit.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
